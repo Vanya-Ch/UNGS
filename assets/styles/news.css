@@ -1,0 +1,106 @@
+/* Navigation */
+/* General */
+/* Modal */
+/* Card */
+html {
+  scrollbar-width: none;
+  --ms-overflow-style: none;
+}
+
+.mainNews {
+  margin-left: 200px;
+}
+
+.sectionNews {
+  margin-right: 170px;
+}
+.sectionNews__container {
+  max-width: 80.5555555556%;
+  margin: 0 auto;
+}
+.sectionNews__content {
+  max-height: 100vh;
+  padding-top: 100px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  --ms-overflow-style: none;
+}
+
+.news {
+  position: relative;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 2px dotted black;
+}
+.news__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.news__content {
+  padding: 10px 15px 20px 0;
+  margin-bottom: 10px;
+}
+.news__date {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.asideRight {
+  position: fixed;
+  right: 0;
+  top: 50px;
+  bottom: 50px;
+  max-width: 170px;
+  width: 100%;
+  margin-right: 20px;
+}
+.asideRight__content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+.asideRight__online {
+  border: 1px solid black;
+  height: 300px;
+  width: 100%;
+}
+
+.birthdayInfo {
+  display: flex;
+  flex-direction: column;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.birthdayInfo__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.birthdayInfo__count {
+  transition: all 0.3s linear;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid black;
+}
+.birthdayInfo__count.active {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid black;
+  border-top: none;
+}
+.birthdayInfo__main.hidden {
+  display: none;
+}
+.birthdayInfo__content {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}/*# sourceMappingURL=news.css.map */

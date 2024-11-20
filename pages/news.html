@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/styles/general.css">
+    <link rel="stylesheet" href="../assets/styles/news.css">
+    <title>Новини</title>
+</head>
+
+<body>
+    <header class="header">
+        <form id="logout-form" class="logout" action="/logout" method="POST" style="display: inline;">
+            <button class="logout__button" type="submit">Вийти</button>
+          </form>
+    </header>
+    <aside class="asideNavigation">
+        <nav class="navigation">
+            <div class="navigation__logo">
+                <img class="logo-animation" src="../assets/images/logo.png" alt="logo">
+            </div>
+            <ul class="navigation__menu">
+                <li class="navigation__content">
+                    <a href="/pages/news.html" class="navigation__link">Новини</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/createNews.html" class="navigation__link">Створення новин</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/orgStructure.html" class="navigation__link">Оргструктура</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/rentCar.html" class="navigation__link">Бронювання авто</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="" class="navigation__link">Завдання</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="" class="navigation__link">Налаштування</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="mainNews">
+        <section class="sectionNews">
+            <div class="sectionNews__container">
+                <div class="sectionNews__content">
+                    <ul id="info-list"></ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <aside class="asideRight">
+        <div class="asideRight__content">
+            <div class="asideRight__bd">
+
+                <div class="birthdayInfo">
+                    <div class="birthdayInfo__heading">
+                        <div class="birthdayInfo__month">
+
+                        </div>
+                        <span class="birthdayInfo__count"></span>
+                    </div>
+                    <div class="birthdayInfo__main hidden">
+
+                    </div>
+                </div>
+            </div>
+            <div class="asideRight__online">
+
+            </div>
+        </div>
+    </aside>
+    <script src="../assets/scripts/news.js"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+/* Navigation */
+/* General */
+/* Modal */
+/* Card */
+/* Navigation */
+/* General */
+/* Modal */
+/* Card */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  padding: 60px 20px;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.modal__wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  justify-content: space-around;
+}
+.modal__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal__position {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+.modal__name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  position: relative;
+}
+.modal__phone, .modal__email {
+  font-size: 1.5rem;
+}
+.modal__tasks {
+  position: absolute;
+  top: 100%;
+  background-color: rgb(207, 207, 207);
+  z-index: 1001;
+  padding: 10px 5px;
+  font-size: 1.125rem;
+  transition: all 0.3s linear;
+  display: none;
+  border: 1px solid #000;
+  border-radius: 15px;
+}
+
+.modal-close {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+  margin: 15px auto 0;
+}
+
+.canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+}
+
+.orgMain {
+  position: relative;
+  margin-left: 200px;
+}
+.orgMain__container {
+  max-width: 80.5555555556%;
+  margin: 0 auto;
+  position: relative;
+}
+.orgMain__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  z-index: 4;
+}
+
+.lowerLvl {
+  width: 100%;
+  display: flex;
+  gap: 50px;
+}
+
+.drilling,
+.technical,
+.service {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.department {
+  border: 1px solid black;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 300px;
+  background-color: rgb(175, 169, 169);
+  box-shadow: 2px 2px 10px black;
+}
+.department__heading {
+  border-bottom: 1px solid black;
+  padding: 10px 0px;
+  text-align: center;
+}
+.department__worker {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 5px;
+  transition: all 0.3s linear;
+}
+.department__worker:hover {
+  cursor: pointer;
+  background-color: #fff;
+}
+.department__worker-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.department__worker-contacts {
+  display: none;
+}
+.department__worker-position {
+  color: gray;
+  font-size: 0.875rem;
+}
+.department__worker-modal {
+  display: none;
+  width: 300px;
+}
+
+.canvas {
+  margin-left: 200px;
+}/*# sourceMappingURL=orgStr.css.map */

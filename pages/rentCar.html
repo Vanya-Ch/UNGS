@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/styles/general.css">
+    <link rel="stylesheet" href="../assets/styles/rentCar.css">
+    <title>Бронювання авто</title>
+    <style>
+        #driver[disabled] {
+            background-color: white;
+            color: black;
+            cursor: not-allowed;
+            opacity: 1;
+            border: 1px solid #ccc;
+        }
+
+        #carImage {
+            width: 100%;
+        }
+
+        .rentCar__form {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transition: opacity 0.5s ease-in;
+        }
+
+        .rentCar__form--rightSide {
+            max-width: 500px;
+        }
+
+        .rentCar__form--leftSide {
+            max-width: 500px;
+        }
+
+        .form__block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form__label {
+            flex-basis: 30%;
+            text-align: left;
+        }
+
+        .form__input,
+        .form__select,
+        .form__textarea {
+            flex-basis: 60%;
+            width: 100%;
+            text-align: left;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid black;
+        }
+
+        .form__textarea {
+            height: 70px;
+            resize: vertical;
+        }
+
+        .form__buttons {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+
+        .form__buttons--submit,
+        .form__buttons--reset {
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 20px;
+            transition: all .3s linear;
+        }
+
+        .form__buttons--submit {
+            background-color: gray;
+            flex-basis: 55%;
+        }
+
+        .form__buttons--reset {
+            background-color: gray;
+            flex-basis: 40%;
+        }
+
+        .form__buttons--reset:hover {
+            background-color: red;
+            cursor: pointer;
+        }
+
+        .form__buttons--submit:hover {
+            background-color: green;
+            cursor: pointer;
+        }
+
+        #driversContainer {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px;
+        }
+
+        .driver-column {
+            min-width: 200px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+
+        .driver-header-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            gap: 15px;
+            background-color: #00ADEF;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .booking-info {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            border: 1px solid black;
+            border-radius: 20px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        .icon-label{
+            display: flex;
+            align-items: center;
+        }
+        
+        .icon-label__box{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-basis: 15%;
+        }
+        .icon-label__trip{
+            flex-basis: 80%;
+        }
+        .icon-label--time{
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <form id="logout-form" class="logout" action="/logout" method="POST" style="display: inline;">
+            <button class="logout__button" type="submit">Вийти</button>
+          </form>
+    </header>
+    <aside class="asideNavigation">
+        <nav class="navigation">
+            <div class="navigation__logo">
+                <img class="logo-animation" src="../assets/images/logo.png" alt="logo">
+            </div>
+            <ul class="navigation__menu">
+                <li class="navigation__content">
+                    <a href="/pages/news.html" class="navigation__link">Новини</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/createNews.html" class="navigation__link">Створення новин</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/orgStructure.html" class="navigation__link">Оргструктура</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/rentCar.html" class="navigation__link">Бронювання авто</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="" class="navigation__link">Завдання</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="" class="navigation__link">Налаштування</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="rentCar">
+        <div class="rentCar__container">
+            <h1>Бронювання авто</h1>
+            <div class="rentCar__form">
+                <div class="rentCar__form--leftSide">
+                    <form id="rentCarForm" class="form">
+                        <div class="form__block">
+                            <label class="form__label" for="car">Виберіть авто:</label>
+                            <select class="form__select" id="car" name="car" required>
+                                <option value="Toyota Hilux  ВІ 1900 СН">Toyota Hilux ВІ 1900 СН</option>
+                                <option value="Toyota Hilux  ВІ 0019 ВМ">Toyota Hilux ВІ 0019 ВМ</option>
+                                <option value="Toyota Prado  ВІ 7040 ІС">Toyota Prado ВІ 7040 ІС</option>
+                                <option value="Range Rover  ВІ 0070 СК">Range Rover ВІ 0070 СК</option>
+                                <option value="Volkswagen Touareg  ВІ 1963 ІН">Volkswagen Touareg ВІ 1963 ІН</option>
+                                <option value="Volkswagen T6  ВІ 0440 НС">Volkswagen T6 ВІ 0440 НС</option>
+                            </select>
+                        </div>
+
+                        <div class="form__block">
+                            <label class="form__label" for="driver">Водій:</label>
+                            <select class="form__select" id="driver" name="driver" required>
+                                <option value="Євгеній ПАВЛІЙ">Євгеній ПАВЛІЙ</option>
+                                <option value="Олександр ПАТЬОМА">Олександр ПАТЬОМА</option>
+                                <option value="Олександр КАРПЕНКО">Олександр КАРПЕНКО</option>
+                                <option value="Максим ЛОГВИНЕНКО">Максим ЛОГВИНЕНКО</option>
+                                <option value="Олексій НОЖЕНКО">Олексій НОЖЕНКО</option>
+                            </select>
+                        </div>
+
+                        <div class="form__block">
+                            <label class="form__label" for="typeOfTravel">Тип поїздки:</label>
+                            <select class="form__select" id="typeOfTravel" name="typeOfTravel" required>
+                                <option value="Поїздка по місту">Поїздка по місту</option>
+                                <option value="Відрядження">Відрядження</option>
+                                <option value="Відпустка">Відпустка</option>
+                                <option value="Лікарняний">Лікарняний</option>
+                                <option value="Технічний огляд">Технічний огляд</option>
+                            </select>
+                        </div>
+
+                        <div class="form__block">
+                            <label class="form__label" for="passanger">Кого (що) забрати:</label>
+                            <input class="form__input" type="text" id="passanger" name="passanger" required>
+                        </div>
+
+                        <div class="form__block">
+                            <label class="form__label" for="startPoint">Місце початку поїздки:</label>
+                            <input class="form__input" type="text" id="startPoint" name="startPoint"
+                                placeholder="Звідки забрати" required>
+                        </div>
+
+                        <div class="form__block">
+                            <label class="form__label" for="destination">Місце призначення:</label>
+                            <input class="form__input" type="text" id="destination" name="destination"
+                                placeholder="Місце призначення" required>
+                        </div>
+
+                        <div class="form__block">
+                            <label class="form__label" for="startTime">Час початку поїздки:</label>
+                            <input class="form__input" type="datetime-local" id="startTime" name="startTime" required>
+                        </div>
+
+                        <div class="form__block">
+                            <label class="form__label" for="endTime">Час кінця поїздки:</label>
+                            <input class="form__input" type="datetime-local" id="endTime" name="endTime" required>
+                        </div>
+
+                        <div class="form__block">
+                            <label class="form__label" for="comment">Коментар:</label>
+                            <textarea class="form__textarea" id="comment" name="comment"
+                                placeholder="Додаткові побажання до поїздки"></textarea>
+                        </div>
+
+                        <div class="form__buttons">
+                            <button class="form__buttons--submit" type="submit">Забронювати</button>
+                            <button class="form__buttons--reset" type="reset">Очистити</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="rentCar__form--rightSide">
+                    <img id="carImage" src="../assets/images/hilux_white.png" alt="car" class="fade-in">
+                </div>
+
+            </div>
+
+            <div id="driversContainer"></div>
+
+        </div>
+    </main>
+    <script src="../assets/scripts/rentCar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+@import 'variables', 'mixin';
+
+html {
+    scrollbar-width: none;
+    --ms-overflow-style: none;
+}
+
+.mainNews {
+    @include mainMG-L;
+}
+
+.sectionNews {
+    margin-right: 170px;
+
+    &__container {
+        @include container;
+    }
+
+    &__content {
+        max-height: 100vh;
+        padding-top: 100px;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        --ms-overflow-style: none;
+    }
+}
+
+.news {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 2px dotted black;
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    &__content {
+        padding: 10px 15px 20px 0;
+        margin-bottom: 10px;
+    }
+
+    &__date {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+    }
+}
+
+.asideRight {
+    position: fixed;
+    right: 0;
+    top: 50px;
+    bottom: 50px;
+    max-width: 170px;
+    width: 100%;
+    margin-right: 20px;
+    &__content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+    }
+    &__online{
+        border: 1px solid black;
+        height: 300px;
+
+        width: 100%;
+    }
+}
+
+.birthdayInfo {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    &__heading{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__count {
+        transition: all .3s linear;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid black;
+    }
+    &__count.active {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 10px solid black;
+        border-top: none;
+    }
+    &__main.hidden{
+        display: none;
+    }
+    &__content{
+        padding-top: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+}

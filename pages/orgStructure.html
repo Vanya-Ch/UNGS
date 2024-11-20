@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/styles/general.css">
+    <link rel="stylesheet" href="../assets/styles/orgStr.css">
+    <title>Оргструктура</title>
+</head>
+
+<body>
+    <header class="header">
+        <form id="logout-form" class="logout" action="/logout" method="POST" style="display: inline;">
+            <button class="logout__button" type="submit">Вийти</button>
+          </form>
+    </header>
+    <aside>
+        <nav class="navigation">
+            <div class="navigation__logo">
+                <img class="logo-animation" src="../assets/images/logo.png" alt="logo">
+            </div>
+            <ul class="navigation__menu">
+                <li class="navigation__content">
+                    <a href="/pages/news.html" class="navigation__link">Новини</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/createNews.html" class="navigation__link">Створення новин</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/orgStructure.html" class="navigation__link">Оргструктура</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="/pages/rentCar.html" class="navigation__link">Бронювання авто</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="" class="navigation__link">Завдання</a>
+                </li>
+                <li class="navigation__content">
+                    <a href="" class="navigation__link">Налаштування</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <canvas class="canvas" width="3750" height="2153">
+
+    </canvas>
+    <main class="orgMain">
+
+        <div class="orgMain__container">
+            <div class="orgMain__content">
+                <div id="directors" class="directors department">
+                    <h2 class="department__heading">
+                        Адміністрація
+                    </h2>
+
+                </div>
+                <div class="lowerLvl">
+                    <div class="service">
+                        <div id="service" class="department">
+                            <h2 class="department__heading">
+                                Сервісне управляння
+                            </h2>
+
+                        </div>
+                        <div id="drilling" class="department">
+                            <h2 class="department__heading">
+                                Відділ похило-скерованого буріння
+                            </h2>
+                        </div>
+                        <div id="technical" class="department">
+                            <h2 class="department__heading">
+                                Технологічний відділ
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="craftService">
+                        <div id="craftService" class="department">
+                            <h2 class="department__heading">
+                                Цех сервісного обслуговування вибійних інструментів
+                            </h2>
+
+                        </div>
+                    </div>
+                    <div class="finance">
+                        <div id="finance" class="department">
+                            <h2 class="department__heading">
+                                Фінансовий відділ
+                            </h2>
+
+                        </div>
+                    </div>
+                    <div class="transport">
+                        <div id="transport" class="department">
+                            <h2 class="department__heading">
+                                Транспортна группа
+                            </h2>
+
+                        </div>
+                    </div>
+                    <div class="commercial">
+                        <div id="commercial" class="department">
+                            <h2 class="department__heading">
+                                Комерційно договірний відділ
+                            </h2>
+
+                        </div>
+                    </div>
+                    <div class="recruiters">
+                        <div id="recruiters" class="department">
+                            <h2 class="department__heading">
+                                Відділ кадрів
+                            </h2>
+
+                        </div>
+                    </div>
+                    <div class="accountants">
+                        <div id="accountants" class="department">
+                            <h2 class="department__heading">
+                                Відділ бугалтерського обліку та звітності
+                            </h2>
+
+                        </div>
+                    </div>
+                    <div class="safety">
+                        <div id="safety" class="department">
+                            <h2 class="department__heading">
+                                Відділ охорони праці
+                            </h2>
+
+                        </div>
+                    </div>
+                    <div class="optimization">
+                        <div id="optimization" class="department">
+                            <h2 class="department__heading">
+                                Відділ оптимізації та автоматизації бізнес-процесів
+                            </h2>
+
+                        </div>
+                    </div>
+                    <div class="adminGosp">
+                        <div id="adminGosp" class="department">
+                            <h2 class="department__heading">
+                                Адміністративно-господарський відділ
+                            </h2>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal-overlay">
+            <div class="modal">
+                <div class="modal__content"></div>
+                <button class="modal-close">Закрити</button>
+            </div>
+        </div>
+        
+    </main>
+    
+    <script src="../assets/scripts/orgStr.js"></script>
+    <script src="../assets/scripts/canvas.js"></script>
+</body>
+
+</html>

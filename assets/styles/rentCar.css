@@ -1,0 +1,15 @@
+/* Navigation */
+/* General */
+/* Modal */
+/* Card */
+.rentCar {
+  margin-left: 200px;
+  padding-top: 50px;
+  background-image: url(../images/bg3.jpg);
+  background-position: center;
+  background-size: cover;
+}
+.rentCar__container {
+  max-width: 80.5555555556%;
+  margin: 0 auto;
+}/*# sourceMappingURL=rentCar.css.map */

@@ -1,0 +1,74 @@
+/* Navigation */
+/* General */
+/* Modal */
+/* Card */
+.createNews {
+  margin-left: 200px;
+}
+.createNews__container {
+  max-width: 80.5555555556%;
+  margin: 0 auto;
+}
+.createNews__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.createNews__block {
+  height: 100vh;
+  background-image: url(../images/bg3.jpg);
+  background-position: center;
+  background-size: cover;
+}
+.createNews__bg {
+  background-color: rgba(128, 128, 128, 0.801);
+  padding: 25px;
+  border-radius: 20px;
+  border: 2px solid gray;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+input {
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid black;
+  flex-basis: 60%;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: rgb(0, 0, 0);
+}
+
+textarea {
+  flex-basis: 60%;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px 15px;
+}
+
+.createButton {
+  padding: 10px 15px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 20px;
+  transition: all 0.3s linear;
+}
+.createButton:hover {
+  cursor: pointer;
+  background-color: rgb(150, 127, 99);
+  color: white;
+}/*# sourceMappingURL=createNews.css.map */

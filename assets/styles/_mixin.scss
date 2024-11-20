@@ -1,0 +1,8 @@
+@mixin container{
+    max-width: calc(1160px/1440px*100%);
+    margin: 0 auto;
+}
+
+@mixin mainMG-L{
+    margin-left: 200px;
+}
