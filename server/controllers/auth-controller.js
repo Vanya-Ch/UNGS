@@ -21,7 +21,7 @@ async function createUser(username, password, role) {
     }
 }
 
-createUser('user4','user4',['user', 'newsCreator'])
+//createUser('user4','user4',['user', 'newsCreator'])
 
 // Контролер для логіну
 const postLogin = async (req, res) => {
