@@ -10,8 +10,9 @@ const authRequiredRole = require('./server/middleware/authRequiredRole')
 const authVar = require('./server/middleware/authVar')
 
 
+
 const PORT = 3000;
-const URL = "mongodb://localhost:27017/UNGS_DBS";
+const URL = "mongodb+srv://mrvanya383:xGlhQRdFydXRVfcs@ungs.gl60b.mongodb.net/UNGS_DBS";
 
 const app = express();
 
