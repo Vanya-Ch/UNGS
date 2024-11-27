@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         console.log('Новина успішно створена:', data);
         // Перенаправлення на сторінку новин після успішного створення
-        window.location.href = '/pages/news.html';
+        window.location.href = '/news';
       })
       .catch(error => {
         console.error('Помилка при створенні новини:', error);

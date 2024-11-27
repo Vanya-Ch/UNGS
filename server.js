@@ -6,6 +6,8 @@ const rentCarRouter = require('./server/routes/rentCar-routes');
 const auth = require('./server/routes/auth-routes');
 const path = require('path');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 const authRequiredRole = require('./server/middleware/authRequiredRole')
 const authVar = require('./server/middleware/authVar')
 
@@ -16,15 +18,22 @@ const URL = "mongodb+srv://mrvanya383:xGlhQRdFydXRVfcs@ungs.gl60b.mongodb.net/UN
 
 const app = express();
 
-// Додаємо підтримку статичних файлів
-app.use('/assets', express.static(path.join(__dirname, 'assets')));  // Налаштовуємо статичні файли з папки 'assets'
-app.use('/pages', express.static(path.join(__dirname, 'pages')));  // Налаштовуємо статичні файли з папки 'pages'
-
-app.use(session({
-    secret: 'idksecret',
-    resave: false,
-    saveUninitialized: false,
-}))
+app.use(
+    session({
+        secret: 'idksecret',
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: URL,
+        }),
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, // 1 день
+            httpOnly: true,
+            sameSite: 'lax', // Для локального доступу
+            secure: false, // Вимкнути для локального сервера
+        },
+    })
+);
 
 app.use(authVar);
 app.use(express.urlencoded({ extended: true }));
@@ -43,24 +52,31 @@ app.listen(PORT, (err) => {
     err ? console.log(err) : console.log(`listening port ${PORT}`);
 });
 
+// Додаємо підтримку статичних файлів
+app.use('/assets', express.static(path.join(__dirname, 'assets')));  // Налаштовуємо статичні файли з папки 'assets'
+
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html')); 
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 
-app.get('/news',authRequiredRole(['admin', 'newsCreator', 'user']), (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/news.html'));  
+app.get('/news',authRequiredRole(['admin', 'newsCreator', 'user']),  (req, res) => {
+    res.sendFile(path.join(__dirname, 'pages/news.html'));
 });
 
-app.get('/createNews',authRequiredRole(['admin', 'newsCreator']), (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/createNews.html'));  
+app.get('/createNews', authRequiredRole(['admin', 'newsCreator']), (req, res) => {
+    res.sendFile(path.join(__dirname, 'pages/createNews.html'));
 });
 
-app.get('/rentCar',authRequiredRole(['admin', 'newsCreator', 'user']), (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/rentCar.html'));  
+app.get('/orgStructure', (req, res) => {
+    res.sendFile(path.join(__dirname, 'pages/orgStructure.html'));
+});
+
+app.get('/carBooking', authRequiredRole(['admin', 'newsCreator', 'user']), (req, res) => {
+    res.sendFile(path.join(__dirname, 'pages/carBooking.html'));
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'pages/login.html')); 
+    res.sendFile(path.join(__dirname, 'pages/login.html'));
 });

@@ -1,7 +1,5 @@
-const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const User = require('../models/User');
-const session = require('express-session');
 const express = require('express');
 const app = express();
 
@@ -20,25 +18,31 @@ async function createUser(username, password, role) {
         console.error('Error creating user:', error);
     }
 }
-
-//createUser('user','user',['user', 'newsCreator'])
-//createUser('admin','admin',['admin'])
-
+//createUser('newsCreator','newsCreator',['user', 'newsCreator'])
+//createUser('user','user')
 // Контролер для логіну
 const postLogin = async (req, res) => {
     try {
         const { username, password } = req.body;
         const candidate = await User.findOne({ username });
 
-        // Перевірка наявності користувача та порівняння паролів
         if (candidate) {
             const samePass = await bcrypt.compare(password, candidate.password);
             if (samePass) {
-                req.session.user = candidate;
+                req.session.user = {
+                    id: candidate._id,
+                    roles: candidate.role,
+                };
                 req.session.isAuthenticated = true;
+
+                console.log('Сесія перед збереженням:', req.session);
+
                 req.session.save((err) => {
-                    if (err) throw err;
-                    res.redirect('/pages/news.html');
+                    if (err) {
+                        console.error('Помилка збереження сесії:', err);
+                        return res.status(500).send('Помилка збереження сесії');
+                    }
+                    res.redirect('/news'); // Перенаправлення на потрібну сторінку
                 });
             } else {
                 res.redirect('/login');
@@ -51,6 +55,8 @@ const postLogin = async (req, res) => {
         res.status(500).send('Сталася помилка при вході.');
     }
 };
+
+
 
 // Контролер для виходу
 const postLogout = async (req, res) => {
