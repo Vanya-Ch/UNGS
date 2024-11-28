@@ -4,11 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Авторизація</title>
+  <style>
+    /* Загальні стилі для затемнення фону */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Модальне вікно */
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 282px;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
   <h2>Авторизація</h2>
   <form action="/login" method="POST">
-    <label for="username">Ім'я користувача:</label>
+    <label for="username">Логін:</label>
     <input type="text" id="username" name="username" required>
     <label for="password">Пароль:</label>
     <input type="password" id="password" name="password" required>
