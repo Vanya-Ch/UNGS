@@ -27,7 +27,10 @@ const isCarAvailable = async (car, startTime, endTime) => {
 const addRentCar = async (req, res) => {
     const { car, driver, startPoint, destination, time, comment, passanger, typeOfTravel } = req.body;
     const { startTime, endTime } = time[0];
-
+    
+    if (new Date(endTime) <= new Date(startTime)) {
+        return res.status(400).json({ error: 'Кінцевий час не може бути раніше або рівний початковому часу' });
+    }
     const driverAvailable = await isDriverAvailable(driver, startTime, endTime);
 
     if (!driverAvailable) {

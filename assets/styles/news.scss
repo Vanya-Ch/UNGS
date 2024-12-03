@@ -4,7 +4,12 @@ html {
     scrollbar-width: none;
     --ms-overflow-style: none;
 }
-
+body{
+    background-image: url(../images/bg3.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
 .mainNews {
     @include mainMG-L;
 }
@@ -30,7 +35,8 @@ html {
     margin-bottom: 15px;
     padding: 10px;
     border: 2px dotted black;
-
+    border-radius: 20px;
+    background-color: rgba(128, 128, 128, 0.801);
     &__title {
         font-size: 1.5rem;
         font-weight: 700;
@@ -52,7 +58,7 @@ html {
 .asideRight {
     position: fixed;
     right: 0;
-    top: 50px;
+    top: 100px;
     bottom: 50px;
     max-width: 170px;
     width: 100%;

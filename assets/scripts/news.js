@@ -92,24 +92,26 @@ document.addEventListener("DOMContentLoaded", function () {
         e.target.classList.toggle('active')
         document.querySelector('.birthdayInfo__main').classList.toggle('hidden')
     })
-
+    fetch('/current-user')
+    .then(response => response.json())
+    .then(data => console.log('Поточний користувач:', data))
+    .catch(error => console.error('Помилка отримання користувача:', error));
 
     fetch('/infos')
-    .then(response => response.json())
-    .then(data => {
-        
-        data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        .then(response => response.json())
+        .then(data => {
 
-        const infoHtml = data.map(info => `
+            data.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            const infoHtml = data.map(info => `
           <li>
             <div class="news">
               <h2 class="news__title">${info.title}</h2>
               <p class="news__content">${info.newsContent}</p>
               <div class="news__date">
-                <p>Дата: ${new Date(info.date).toLocaleDateString()}, Час: ${new Date(info.date).toLocaleTimeString()}</p>
+                <p>${new Date(info.date).toLocaleDateString()}</p>
               </div>
 
-              <p>Коментарі: </p>
               <div class="comments">
                 ${info.comments.map(comment => `
                   <div class="comment">
@@ -120,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
               <div class="add-comment">
                 <form class="comment-form" data-id="${info._id}">
-                  <input type="text" name="author" placeholder="Ваше ім'я" required />
                   <textarea name="content" placeholder="Ваш коментар" required></textarea>
                   <button type="submit">Відправити</button>
                 </form>
@@ -136,34 +137,42 @@ document.addEventListener("DOMContentLoaded", function () {
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
                     const newsId = form.getAttribute('data-id');
-                    const author = form.querySelector('input[name="author"]').value;
                     const content = form.querySelector('textarea[name="content"]').value;
-
-                    // Відправляємо коментар на сервер
-                    fetch(`/infos/${newsId}/comments`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ author, content })
-                    })
-                        .then(response => response.json())
-                        .then(updatedInfo => {
-                            // Оновлюємо список коментарів після успішного додавання
-                            const commentsContainer = form.previousElementSibling;
-                            commentsContainer.innerHTML += `
-                      <div class="comment">
-                        <strong>${author}:</strong> ${content}
-                      </div>
-                    `;
-
-                            // Очищуємо форму після відправки
-                            form.querySelector('input[name="author"]').value = '';
-                            form.querySelector('textarea[name="content"]').value = '';
+            
+                    // Отримуємо автора з сесії через сервер
+                    fetch('/current-user', { credentials: 'include' })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Користувач не авторизований');
+                            }
+                            return response.json();
+                        })
+                        .then(user => {
+                            const author = user.username;
+            
+                            // Відправляємо коментар на сервер
+                            return fetch(`/infos/${newsId}/comments`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ author, content }),
+                            });
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Помилка сервера при створенні коментаря');
+                            }
+                            return response.json();
+                        })
+                        .then(() => {
+                            // Перезавантаження сторінки після успішного додавання коментаря
+                            window.location.reload();
                         })
                         .catch(error => console.error('Помилка при додаванні коментаря:', error));
                 });
             });
+            
         })
         .catch(error => console.error('Помилка при завантаженні новин:', error));
 });

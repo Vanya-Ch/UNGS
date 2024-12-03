@@ -45,21 +45,31 @@ const updateInfos = (req, res) => {
     .catch((err) => handleError(res, err));
 };
 
-const addComment = (req, res) => {
-  const { author, content } = req.body;
+const addComment = async (req, res) => {
+  const { id } = req.params;
+  const { content } = req.body;
 
-  Info.findById(req.params.id)
-    .then((info) => {
+  if (!req.session?.user) {
+      return res.status(401).json({ message: 'Користувач не авторизований' });
+  }
+
+  const author = req.session.user.username;
+
+  try {
+      const info = await Info.findById(id);
       if (!info) {
-        return res.status(404).json({ error: 'Новина не знайдена' });
+          return res.status(404).json({ message: 'Новина не знайдена' });
       }
+
+      // Додаємо коментар
       info.comments.push({ author, content });
-      return info.save();
-    })
-    .then((updatedInfo) => {
-      res.status(201).json(updatedInfo);
-    })
-    .catch((err) => handleError(res, err));
+      await info.save();
+
+      res.json({ author, content });
+  } catch (error) {
+      console.error('Помилка при додаванні коментаря:', error);
+      res.status(500).json({ message: 'Помилка сервера' });
+  }
 };
 
 module.exports = {

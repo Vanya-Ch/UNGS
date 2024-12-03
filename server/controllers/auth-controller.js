@@ -29,14 +29,15 @@ const postLogin = async (req, res) => {
         if (candidate) {
             const samePass = await bcrypt.compare(password, candidate.password);
             if (samePass) {
+                // Додаємо дані користувача в сесію
                 req.session.user = {
                     id: candidate._id,
+                    username: candidate.username,
                     roles: candidate.role,
                 };
                 req.session.isAuthenticated = true;
 
-                console.log('Сесія перед збереженням:', req.session);
-
+                // Зберігаємо сесію
                 req.session.save((err) => {
                     if (err) {
                         console.error('Помилка збереження сесії:', err);

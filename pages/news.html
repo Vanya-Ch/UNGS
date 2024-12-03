@@ -12,10 +12,13 @@
 
 <body>
     <header class="header">
-        <form id="logout-form" class="logout" action="/logout" method="POST" style="display: inline;">
-            <button class="logout__button" type="submit">Вийти</button>
-          </form>
+        <div class="header__container">
+            <form id="logout-form" class="logout" action="/logout" method="POST" style="display: inline;">
+                <button class="logout__button" type="submit">Вийти</button>
+            </form>
+        </div>
     </header>
+
     <aside class="asideNavigation">
         <nav class="navigation">
             <div class="navigation__logo">
@@ -23,22 +26,22 @@
             </div>
             <ul class="navigation__menu">
                 <li class="navigation__content">
-                    <a href="/news" class="navigation__link">Новини</a> <!-- Роут для новин -->
+                    <a href="/news" class="navigation__link">Новини</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/createNews" class="navigation__link">Створення новин</a> <!-- Роут для створення новин -->
+                    <a href="/createNews" class="navigation__link">Створення новин</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/orgStructure" class="navigation__link">Оргструктура</a> <!-- Статичний файл для оргструктури -->
+                    <a href="/orgStructure" class="navigation__link">Оргструктура</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/carBooking" class="navigation__link">Бронювання авто</a> <!-- Роут для бронювання авто -->
+                    <a href="/carBooking" class="navigation__link">Бронювання авто</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/tasks" class="navigation__link">Завдання</a> <!-- Доданий роут для завдань -->
+                    <a href="/tasks" class="navigation__link">Завдання</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/settings" class="navigation__link">Налаштування</a> <!-- Доданий роут для налаштувань -->
+                    <a href="/settings" class="navigation__link">Налаштування</a>
                 </li>
             </ul>
         </nav>
@@ -74,7 +77,18 @@
         </div>
     </aside>
     <script src="../assets/scripts/news.js"></script>
-    
+    <script>
+        fetch('/current-user', { credentials: 'include' })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Користувач не авторизований');
+                }
+                return response.json();
+            })
+            .then(data => console.log('Поточний користувач:', data))
+            .catch(error => console.error('Помилка отримання користувача:', error));
+
+    </script>
 </body>
 
 </html>

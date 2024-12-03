@@ -70,10 +70,13 @@ ol {
 }
 
 header{
-    margin-left: 250px;
-    margin-top: 20px;
     position: absolute;
     background-color: transparent;
+    top: 20px;
+    right: 50px;
+    &__container{
+        @include container;
+    }
 }
 
 .logout{

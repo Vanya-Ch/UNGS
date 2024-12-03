@@ -7,6 +7,13 @@ html {
   --ms-overflow-style: none;
 }
 
+body {
+  background-image: url(../images/bg3.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
 .mainNews {
   margin-left: 200px;
 }
@@ -31,6 +38,8 @@ html {
   margin-bottom: 15px;
   padding: 10px;
   border: 2px dotted black;
+  border-radius: 20px;
+  background-color: rgba(128, 128, 128, 0.801);
 }
 .news__title {
   font-size: 1.5rem;
@@ -50,7 +59,7 @@ html {
 .asideRight {
   position: fixed;
   right: 0;
-  top: 50px;
+  top: 100px;
   bottom: 50px;
   max-width: 170px;
   width: 100%;

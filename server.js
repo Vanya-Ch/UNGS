@@ -10,6 +10,7 @@ const MongoStore = require('connect-mongo');
 
 const authRequiredRole = require('./server/middleware/authRequiredRole')
 const authVar = require('./server/middleware/authVar')
+const userRoutes = require('./server/controllers/currentUser-controller'); // або як ви назвете файл
 
 
 
@@ -35,11 +36,12 @@ app.use(
     })
 );
 
-app.use(authVar);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(auth);
+app.use(authVar);
+app.use(userRoutes);
 app.use(infoRouter);
 app.use(rentCarRouter);
 
@@ -61,7 +63,7 @@ app.get('/', (req, res) => {
 });
 
 
-app.get('/news',authRequiredRole(['admin', 'newsCreator', 'user']),  (req, res) => {
+app.get('/news', authRequiredRole(['admin', 'newsCreator', 'user']), (req, res) => {
     res.sendFile(path.join(__dirname, 'pages/news.html'));
 });
 

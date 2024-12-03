@@ -67,10 +67,14 @@ ol {
 }
 
 header {
-  margin-left: 250px;
-  margin-top: 20px;
   position: absolute;
   background-color: transparent;
+  top: 20px;
+  right: 50px;
+}
+header__container {
+  max-width: 80.5555555556%;
+  margin: 0 auto;
 }
 
 .logout__button {
