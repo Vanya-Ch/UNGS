@@ -121,9 +121,9 @@ document.addEventListener("DOMContentLoaded", function () {
               </div>
 
               <div class="add-comment">
-                <form class="comment-form" data-id="${info._id}">
-                  <textarea name="content" placeholder="Ваш коментар" required></textarea>
-                  <button type="submit">Відправити</button>
+                <form class="comment" data-id="${info._id}">
+                  <textarea class="comment__text" name="content" placeholder="Ваш коментар" required></textarea>
+                  <button class="comment__button" type="submit">Відправити</button>
                 </form>
               </div>
               
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('info-list').innerHTML = infoHtml;
 
             // Додаємо обробники для кожної форми коментарів
-            document.querySelectorAll('.comment-form').forEach(form => {
+            document.querySelectorAll('.comment').forEach(form => {
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
                     const newsId = form.getAttribute('data-id');

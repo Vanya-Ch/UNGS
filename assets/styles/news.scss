@@ -111,3 +111,22 @@ body{
         justify-content: space-between;
     }
 }
+
+.comment{
+    display: flex;
+    align-items: center;
+    &__text{
+        border-radius: 20px;
+        padding: 10px;
+    }
+    &__button{
+        border-radius: 20px;
+        padding: 10px;
+        border: 1px solid black;
+        transition: all .3s linear;
+        &:hover{
+            cursor: pointer;
+            background-color: greenyellow;
+        }
+    }
+}
