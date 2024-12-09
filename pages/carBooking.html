@@ -35,12 +35,17 @@
             opacity: 1;
             transition: opacity 0.5s ease-in;
         }
+        .form{
+            width: 100%;
+        }
 
         .rentCar__form--rightSide {
+            width: 100%;
             max-width: 500px;
         }
 
         .rentCar__form--leftSide {
+            display: contents;
             max-width: 500px;
         }
 
@@ -174,22 +179,22 @@
             </div>
             <ul class="navigation__menu">
                 <li class="navigation__content">
-                    <a href="/news" class="navigation__link">Новини</a> <!-- Роут для новин -->
+                    <a href="/news" class="navigation__link">Новини</a> 
+                </li>
+                <li data-role="admin,newsCreator" class="navigation__content">
+                    <a href="/createNews" class="navigation__link">Створення новин</a> 
                 </li>
                 <li class="navigation__content">
-                    <a href="/createNews" class="navigation__link">Створення новин</a> <!-- Роут для створення новин -->
+                    <a href="/orgStructure" class="navigation__link">Оргструктура</a> 
                 </li>
                 <li class="navigation__content">
-                    <a href="/orgStructure" class="navigation__link">Оргструктура</a> <!-- Статичний файл для оргструктури -->
+                    <a href="/carBooking" class="navigation__link">Бронювання авто</a> 
                 </li>
                 <li class="navigation__content">
-                    <a href="/carBooking" class="navigation__link">Бронювання авто</a> <!-- Роут для бронювання авто -->
+                    <a href="/tasks" class="navigation__link">Завдання</a> 
                 </li>
                 <li class="navigation__content">
-                    <a href="/tasks" class="navigation__link">Завдання</a> <!-- Доданий роут для завдань -->
-                </li>
-                <li class="navigation__content">
-                    <a href="/settings" class="navigation__link">Налаштування</a> <!-- Доданий роут для налаштувань -->
+                    <a href="/settings" class="navigation__link">Налаштування</a> 
                 </li>
             </ul>
         </nav>
@@ -206,8 +211,8 @@
                                 <option value="Toyota Hilux  ВІ 1900 СН">Toyota Hilux ВІ 1900 СН</option>
                                 <option value="Toyota Hilux  ВІ 0019 ВМ">Toyota Hilux ВІ 0019 ВМ</option>
                                 <option value="Toyota Prado  ВІ 7040 ІС">Toyota Prado ВІ 7040 ІС</option>
-                                <option value="Range Rover  ВІ 0070 СК">Range Rover ВІ 0070 СК</option>
-                                <option value="Volkswagen Touareg  ВІ 1963 ІН">Volkswagen Touareg ВІ 1963 ІН</option>
+                                <option data-role="admin,newsCreator,director" value="Range Rover  ВІ 0070 СК">Range Rover ВІ 0070 СК</option>
+                                <option data-role="admin,newsCreator,director" value="Volkswagen Touareg  ВІ 1963 ІН">Volkswagen Touareg ВІ 1963 ІН</option>
                                 <option value="Volkswagen T6  ВІ 0440 НС">Volkswagen T6 ВІ 0440 НС</option>
                             </select>
                         </div>
@@ -284,6 +289,7 @@
         </div>
     </main>
     <script src="../assets/scripts/rentCar.js"></script>
+    <script src="../assets/scripts/roleAccess.js"></script>
 </body>
 
 </html>

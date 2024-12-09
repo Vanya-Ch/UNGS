@@ -28,7 +28,7 @@
                 <li class="navigation__content">
                     <a href="/news" class="navigation__link">Новини</a>
                 </li>
-                <li class="navigation__content">
+                <li data-role="admin,newsCreator" class="navigation__content">
                     <a href="/createNews" class="navigation__link">Створення новин</a>
                 </li>
                 <li class="navigation__content">
@@ -77,18 +77,7 @@
         </div>
     </aside>
     <script src="../assets/scripts/news.js"></script>
-    <script>
-        fetch('/current-user', { credentials: 'include' })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Користувач не авторизований');
-                }
-                return response.json();
-            })
-            .then(data => console.log('Поточний користувач:', data))
-            .catch(error => console.error('Помилка отримання користувача:', error));
-
-    </script>
+    <script src="../assets/scripts/roleAccess.js"></script>
 </body>
 
 </html>

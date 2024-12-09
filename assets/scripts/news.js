@@ -166,7 +166,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             return response.json();
                         })
                         .then(() => {
-                            // Перезавантаження сторінки після успішного додавання коментаря
                             window.location.reload();
                         })
                         .catch(error => console.error('Помилка при додаванні коментаря:', error));
