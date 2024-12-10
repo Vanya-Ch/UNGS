@@ -11,7 +11,7 @@ const MongoStore = require('connect-mongo');
 const authRequiredRole = require('./server/middleware/authRequiredRole')
 const authVar = require('./server/middleware/authVar')
 const userRoutes = require('./server/controllers/currentUser-controller'); // або як ви назвете файл
-
+require('dotenv').config();
 
 
 const PORT = 3000;
@@ -21,7 +21,7 @@ const app = express();
 
 app.use(
     session({
-        secret: 'idksecret',
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({
