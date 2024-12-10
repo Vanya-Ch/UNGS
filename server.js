@@ -10,12 +10,8 @@ const MongoStore = require('connect-mongo');
 
 const authRequiredRole = require('./server/middleware/authRequiredRole')
 const authVar = require('./server/middleware/authVar')
-const userRoutes = require('./server/controllers/currentUser-controller'); // або як ви назвете файл
+const userRoutes = require('./server/controllers/currentUser-controller');
 require('dotenv').config();
-
-
-const PORT = 3000;
-const URL = "mongodb+srv://mrvanya383:xGlhQRdFydXRVfcs@ungs.gl60b.mongodb.net/UNGS_DBS";
 
 const app = express();
 
@@ -25,7 +21,7 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({
-            mongoUrl: URL,
+            mongoUrl: process.env.URL,
         }),
         cookie: {
             maxAge: 1000 * 60 * 60 * 24, // 1 день
@@ -46,12 +42,12 @@ app.use(infoRouter);
 app.use(rentCarRouter);
 
 mongoose
-    .connect(URL)
+    .connect(process.env.URL)
     .then((res) => console.log('Connected to MongoDB'))
     .catch((err) => console.log(`DB connection error: ${err}`));
 
-app.listen(PORT, (err) => {
-    err ? console.log(err) : console.log(`listening port ${PORT}`);
+app.listen(process.env.PORT, (err) => {
+    err ? console.log(err) : console.log(`listening port ${process.env.PORT}`);
 });
 
 // Додаємо підтримку статичних файлів

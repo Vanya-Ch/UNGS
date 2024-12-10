@@ -48,7 +48,6 @@ ol {
   border-bottom: 1px solid rgba(255, 255, 255, 0.8);
   text-align: center;
   transition: all 0.3s linear;
-  margin-top: 5px;
 }
 .navigation__content:hover {
   background-color: #fff;
