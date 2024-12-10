@@ -14,6 +14,8 @@ const userRoutes = require('./server/controllers/currentUser-controller');
 require('dotenv').config();
 const app = express();
 
+const PORT = 3000
+
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -45,8 +47,8 @@ mongoose
     .then((res) => console.log('Connected to MongoDB'))
     .catch((err) => console.log(`DB connection error: ${err}`));
 
-app.listen(process.env.PORT, (err) => {
-    err ? console.log(err) : console.log(`listening port ${process.env.PORT}`);
+app.listen(PORT, (err) => {
+    err ? console.log(err) : console.log(`listening port ${PORT}`);
 });
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));  
