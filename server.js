@@ -14,7 +14,8 @@ const userRoutes = require('./server/controllers/currentUser-controller');
 require('dotenv').config();
 const app = express();
 
-const PORT = 3000
+const URL="mongodb+srv://mrvanya383:xGlhQRdFydXRVfcs@ungs.gl60b.mongodb.net/UNGS_DBS"
+const PORT = 3000;
 
 app.use(
     session({
@@ -22,7 +23,7 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({
-            mongoUrl: process.env.URL,
+            mongoUrl: URL,
         }),
         cookie: {
             maxAge: 1000 * 60 * 60 * 24,
@@ -43,7 +44,7 @@ app.use(infoRouter);
 app.use(rentCarRouter);
 
 mongoose
-    .connect(process.env.URL)
+    .connect(URL)
     .then((res) => console.log('Connected to MongoDB'))
     .catch((err) => console.log(`DB connection error: ${err}`));
 
