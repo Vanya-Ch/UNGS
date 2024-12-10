@@ -24,10 +24,10 @@ app.use(
             mongoUrl: process.env.URL,
         }),
         cookie: {
-            maxAge: 1000 * 60 * 60 * 24, // 1 день
+            maxAge: 1000 * 60 * 60 * 24,
             httpOnly: true,
-            sameSite: 'lax', // Для локального доступу
-            secure: false, // Вимкнути для локального сервера
+            sameSite: 'lax',
+            secure: false,
         },
     })
 );
@@ -50,8 +50,7 @@ app.listen(process.env.PORT, (err) => {
     err ? console.log(err) : console.log(`listening port ${process.env.PORT}`);
 });
 
-// Додаємо підтримку статичних файлів
-app.use('/assets', express.static(path.join(__dirname, 'assets')));  // Налаштовуємо статичні файли з папки 'assets'
+app.use('/assets', express.static(path.join(__dirname, 'assets')));  
 
 
 app.get('/', (req, res) => {
