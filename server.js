@@ -12,7 +12,6 @@ const authRequiredRole = require('./server/middleware/authRequiredRole')
 const authVar = require('./server/middleware/authVar')
 const userRoutes = require('./server/controllers/currentUser-controller');
 require('dotenv').config();
-
 const app = express();
 
 app.use(
