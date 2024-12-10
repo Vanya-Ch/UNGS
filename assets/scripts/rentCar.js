@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
         'Toyota Hilux  ВІ 1900 СН': '../assets/images/hilux_white.png',
         'Toyota Hilux  ВІ 0019 ВМ': '../assets/images/hilux_white.png',
         'Toyota Prado  ВІ 7040 ІС': '../assets/images/prado_black.png',
-        'Range Rover  ВІ 0070 СК': '../assets/images/land_rover_gray.jpg',
+        'Range Rover  ВІ 0070 СК': '../assets/images/land_rover_gray.png',
         'Volkswagen Touareg  ВІ 1963 ІН': '../assets/images/touareg_black.png',
-        'Volkswagen T6  ВІ 0440 НС': '../assets/images/volkswagen_t6_white.jpg'
+        'Volkswagen T6  ВІ 0440 НС': '../assets/images/volkswagen_t6_white.png'
     };
 
     carSelect.addEventListener('change', function () {
