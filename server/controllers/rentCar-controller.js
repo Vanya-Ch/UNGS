@@ -28,10 +28,9 @@ const addRentCar = async (req, res) => {
     const { car, driver, startPoint, destination, time, comment, passanger, typeOfTravel } = req.body;
     const { startTime, endTime } = time[0];
 
-    const now = new Date(); // Поточна дата і час
-    now.setHours(0, 0, 0, 0); // Обнулюємо час для порівняння лише дати
+    const now = new Date(); 
+    now.setHours(0, 0, 0, 0); 
 
-    // Перевірка, що початковий час не раніше сьогоднішнього дня
     if (new Date(startTime) < now) {
         return res.status(400).json({ error: 'Початковий час не може бути раніше сьогоднішнього дня' });
     }

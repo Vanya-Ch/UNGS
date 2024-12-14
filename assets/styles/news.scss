@@ -36,7 +36,7 @@ body{
     padding: 10px;
     border: 2px dotted black;
     border-radius: 20px;
-    background-color: rgba(128, 128, 128, 0.801);
+    background-color: rgba(128, 128, 128);
     &__title {
         font-size: 1.5rem;
         font-weight: 700;
@@ -78,6 +78,10 @@ body{
 }
 
 .birthdayInfo {
+    background-color: white;
+    padding: 10px;
+    border-radius: 20px;
+
     display: flex;
     flex-direction: column;
     height: fit-content;
@@ -109,6 +113,8 @@ body{
         padding-top: 10px;
         display: flex;
         justify-content: space-between;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #000;
     }
 }
 

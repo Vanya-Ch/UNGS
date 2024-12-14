@@ -61,7 +61,6 @@ const addComment = async (req, res) => {
           return res.status(404).json({ message: 'Новина не знайдена' });
       }
 
-      // Додаємо коментар
       info.comments.push({ author, content });
       await info.save();
 

@@ -18,8 +18,10 @@ async function createUser(username, password, role) {
         console.error('Error creating user:', error);
     }
 }
+
 //createUser('newsCreator','newsCreator',['user', 'newsCreator'])
 //createUser('user','user')
+
 // Контролер для логіну
 const postLogin = async (req, res) => {
     try {
@@ -29,7 +31,6 @@ const postLogin = async (req, res) => {
         if (candidate) {
             const samePass = await bcrypt.compare(password, candidate.password);
             if (samePass) {
-                // Додаємо дані користувача в сесію
                 req.session.user = {
                     id: candidate._id,
                     username: candidate.username,
@@ -37,13 +38,12 @@ const postLogin = async (req, res) => {
                 };
                 req.session.isAuthenticated = true;
 
-                // Зберігаємо сесію
                 req.session.save((err) => {
                     if (err) {
                         console.error('Помилка збереження сесії:', err);
                         return res.status(500).send('Помилка збереження сесії');
                     }
-                    res.redirect('/news'); // Перенаправлення на потрібну сторінку
+                    res.redirect('/news'); 
                 });
             } else {
                 res.redirect('/login');
