@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const infoRouter = require('./server/routes/info-routes');
 const rentCarRouter = require('./server/routes/rentCar-routes');
+const exportRents = require('./server/routes/exportData-routes')
 
 const auth = require('./server/routes/auth-routes');
 const path = require('path');
@@ -41,6 +42,7 @@ app.use(auth);
 app.use(authVar);
 app.use(userRoutes);
 app.use(infoRouter);
+app.use(exportRents);
 app.use(rentCarRouter);
 
 mongoose

@@ -35,7 +35,8 @@
             opacity: 1;
             transition: opacity 0.5s ease-in;
         }
-        .form{
+
+        .form {
             width: 100%;
         }
 
@@ -84,7 +85,8 @@
         }
 
         .form__buttons--submit,
-        .form__buttons--reset {
+        .form__buttons--reset,
+        .form__buttons--get {
             border: 1px solid black;
             padding: 10px;
             border-radius: 20px;
@@ -93,12 +95,17 @@
 
         .form__buttons--submit {
             background-color: gray;
-            flex-basis: 55%;
+            flex-basis: 50%;
         }
 
         .form__buttons--reset {
             background-color: gray;
-            flex-basis: 40%;
+            flex-basis: 25%;
+        }
+
+        .form__buttons--get {
+            background-color: gray;
+            flex-basis: 25%;
         }
 
         .form__buttons--reset:hover {
@@ -108,6 +115,11 @@
 
         .form__buttons--submit:hover {
             background-color: green;
+            cursor: pointer;
+        }
+
+        .form__buttons--get:hover {
+            background-color: white;
             cursor: pointer;
         }
 
@@ -146,22 +158,65 @@
             border-radius: 20px;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
-        .icon-label{
+
+        .icon-label {
             display: flex;
             align-items: center;
         }
-        
-        .icon-label__box{
+
+        .icon-label__box {
             display: flex;
             align-items: center;
             justify-content: center;
             flex-basis: 15%;
         }
-        .icon-label__trip{
+
+        .icon-label__trip {
             flex-basis: 80%;
         }
-        .icon-label--time{
+
+        .icon-label--time {
             flex-direction: column;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .modal-content select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .modal-content button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .modal-content button.cancel {
+            background-color: #f44336;
         }
     </style>
 </head>
@@ -170,7 +225,7 @@
     <header class="header">
         <form id="logout-form" class="logout" action="/logout" method="POST" style="display: inline;">
             <button class="logout__button" type="submit">Вийти</button>
-          </form>
+        </form>
     </header>
     <aside class="asideNavigation">
         <nav class="navigation">
@@ -179,22 +234,22 @@
             </div>
             <ul class="navigation__menu">
                 <li class="navigation__content">
-                    <a href="/news" class="navigation__link">Новини</a> 
+                    <a href="/news" class="navigation__link">Новини</a>
                 </li>
                 <li data-role="admin,newsCreator" class="navigation__content">
-                    <a href="/createNews" class="navigation__link">Створення новин</a> 
+                    <a href="/createNews" class="navigation__link">Створення новин</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/orgStructure" class="navigation__link">Оргструктура</a> 
+                    <a href="/orgStructure" class="navigation__link">Оргструктура</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/carBooking" class="navigation__link">Бронювання авто</a> 
+                    <a href="/carBooking" class="navigation__link">Бронювання авто</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/tasks" class="navigation__link">Завдання</a> 
+                    <a href="/tasks" class="navigation__link">Завдання</a>
                 </li>
                 <li class="navigation__content">
-                    <a href="/settings" class="navigation__link">Налаштування</a> 
+                    <a href="/settings" class="navigation__link">Налаштування</a>
                 </li>
             </ul>
         </nav>
@@ -211,15 +266,17 @@
                                 <option value="Toyota Hilux  ВІ 1900 СН">Toyota Hilux ВІ 1900 СН</option>
                                 <option value="Toyota Hilux  ВІ 0019 ВМ">Toyota Hilux ВІ 0019 ВМ</option>
                                 <option value="Toyota Prado  ВІ 7040 ІС">Toyota Prado ВІ 7040 ІС</option>
-                                <option data-role="admin,newsCreator,director" value="Range Rover  ВІ 0070 СК">Range Rover ВІ 0070 СК</option>
-                                <option data-role="admin,newsCreator,director" value="Volkswagen Touareg  ВІ 1963 ІН">Volkswagen Touareg ВІ 1963 ІН</option>
+                                <option data-role="admin,newsCreator,director" value="Range Rover  ВІ 0070 СК">Range
+                                    Rover ВІ 0070 СК</option>
+                                <option data-role="admin,newsCreator,director" value="Volkswagen Touareg  ВІ 1963 ІН">
+                                    Volkswagen Touareg ВІ 1963 ІН</option>
                                 <option value="Volkswagen T6  ВІ 0440 НС">Volkswagen T6 ВІ 0440 НС</option>
                             </select>
                         </div>
 
                         <div class="form__block">
                             <label class="form__label" for="driver">Водій:</label>
-                            <select class="form__select" id="driver" name="driver" required>
+                            <select class="form__select" disabled id="driver" name="driver" required>
                                 <option value="Євгеній ПАВЛІЙ">Євгеній ПАВЛІЙ</option>
                                 <option value="Олександр ПАТЬОМА">Олександр ПАТЬОМА</option>
                                 <option value="Олександр КАРПЕНКО">Олександр КАРПЕНКО</option>
@@ -275,6 +332,8 @@
                         <div class="form__buttons">
                             <button class="form__buttons--submit" type="submit">Забронювати</button>
                             <button class="form__buttons--reset" type="reset">Очистити</button>
+                            <button class="form__buttons--get" data-role="admin,finance" id="exportBtn"
+                                type="reset">Витяг данних</button>
                         </div>
                     </form>
                 </div>
@@ -287,9 +346,33 @@
             <div id="driversContainer"></div>
 
         </div>
+        <!-- Модальне вікно -->
+        <div id="monthModal" class="modal">
+            <div class="modal-content">
+                <h3>Виберіть місяць</h3>
+                <select id="monthSelect">
+                    <option value="" disabled selected>Оберіть місяць</option>
+                    <option value="1">Січень</option>
+                    <option value="2">Лютий</option>
+                    <option value="3">Березень</option>
+                    <option value="4">Квітень</option>
+                    <option value="5">Травень</option>
+                    <option value="6">Червень</option>
+                    <option value="7">Липень</option>
+                    <option value="8">Серпень</option>
+                    <option value="9">Вересень</option>
+                    <option value="10">Жовтень</option>
+                    <option value="11">Листопад</option>
+                    <option value="12">Грудень</option>
+                </select>
+                <button id="confirmBtn">Підтвердити</button>
+                <button id="cancelBtn" class="cancel">Скасувати</button>
+            </div>
+        </div>
     </main>
     <script src="../assets/scripts/rentCar.js"></script>
     <script src="../assets/scripts/roleAccess.js"></script>
+    <script src="../assets/scripts/getRentData.js"></script>
 </body>
 
 </html>
