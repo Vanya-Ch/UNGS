@@ -164,51 +164,55 @@ function displayBookingsByDriver(bookings) {
         const tomorrow = new Date(today);
         tomorrow.setDate(today.getDate() + 1); // Завтрашній день
 
+        // Сортуємо бронювання за датою початку
+        const sortedBookings = bookingsByDriver[driver].sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+
         // Додаємо кожне бронювання для цього водія
-        bookingsByDriver[driver].forEach(booking => {
+        sortedBookings.forEach(booking => {
             const bookingDate = new Date(booking.startTime);
             bookingDate.setHours(0, 0, 0, 0); // Ігноруємо години, хвилини
 
+            // Перевірка на сьогоднішню чи завтрашню дату
             if (bookingDate.getTime() === today.getTime() || bookingDate.getTime() === tomorrow.getTime()) {
                 const bookingInfo = document.createElement('div');
                 bookingInfo.classList.add('booking-info');
                 bookingInfo.innerHTML = `
-                <div class="icon-label--time">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <div class="time-range">
-                        <p>${new Date(booking.startTime).toLocaleString('uk-UA', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
-                        <p>${new Date(booking.endTime).toLocaleString('uk-UA', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
-                    </div>
-                </div>
+        <div class="icon-label--time">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div class="time-range">
+                <p>${new Date(booking.startTime).toLocaleString('uk-UA', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
+                <p>${new Date(booking.endTime).toLocaleString('uk-UA', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
+            </div>
+        </div>
 
-                <div class="icon-label">
-                    <div class="icon-label__box">
-                        <svg width="24px" height="24px" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.37892 10.2236L8 16L12.6211 10.2236C13.5137 9.10788 14 7.72154 14 6.29266V6C14 2.68629 11.3137 0 8 0C4.68629 0 2 2.68629 2 6V6.29266C2 7.72154 2.4863 9.10788 3.37892 10.2236ZM8 8C9.10457 8 10 7.10457 10 6C10 4.89543 9.10457 4 8 4C6.89543 4 6 4.89543 6 6C6 7.10457 6.89543 8 8 8Z" fill="#000000"/>
-                        </svg>
-                    </div>
-                    : <span class="icon-label__trip">${booking.startPoint}</span>
-                </div>
+        <div class="icon-label">
+            <div class="icon-label__box">
+                <svg width="24px" height="24px" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.37892 10.2236L8 16L12.6211 10.2236C13.5137 9.10788 14 7.72154 14 6.29266V6C14 2.68629 11.3137 0 8 0C4.68629 0 2 2.68629 2 6V6.29266C2 7.72154 2.4863 9.10788 3.37892 10.2236ZM8 8C9.10457 8 10 7.10457 10 6C10 4.89543 9.10457 4 8 4C6.89543 4 6 4.89543 6 6C6 7.10457 6.89543 8 8 8Z" fill="#000000"/>
+                </svg>
+            </div>
+            : <span class="icon-label__trip">${booking.startPoint}</span>
+        </div>
 
-                <div class="icon-label">
-                    <div class="icon-label__box">
-                    <svg width="24px" height="24px" viewBox="0 0 24 24"><defs><style>.cls-1{fill:none;stroke:#020202;stroke-miterlimit:10;stroke-width:1.91px;}.cls-2{fill:#020202;}</style></defs><path class="cls-1" d="M9.11,5.08c0,2.39-3.81,6-3.81,6s-3.82-3.58-3.82-6A3.7,3.7,0,0,1,5.3,1.5,3.7,3.7,0,0,1,9.11,5.08Z"/><circle class="cls-2" cx="5.3" cy="5.32" r="0.95"/><path class="cls-1" d="M4.34,13h4.3A2.39,2.39,0,0,1,11,15.34h0a2.39,2.39,0,0,1-2.38,2.39H3.86a2.39,2.39,0,0,0-2.38,2.38h0A2.39,2.39,0,0,0,3.86,22.5H17.7"/><line class="cls-1" x1="16.75" y1="9.14" x2="16.75" y2="20.59"/><polygon class="cls-1" points="16.75 14.86 21.52 14.86 20.57 12.96 21.52 11.04 16.75 11.04 16.75 14.86"/></svg>
-                    </div>
-                    : <span class="icon-label__trip">${booking.destination}</span>
-                </div>
-                <p>Пасажир: ${booking.passanger}</p>
-                <p>Тип поїздки: ${booking.typeOfTravel}</p>
-                `;
-    
+        <div class="icon-label">
+            <div class="icon-label__box">
+            <svg width="24px" height="24px" viewBox="0 0 24 24"><defs><style>.cls-1{fill:none;stroke:#020202;stroke-miterlimit:10;stroke-width:1.91px;}.cls-2{fill:#020202;}</style></defs><path class="cls-1" d="M9.11,5.08c0,2.39-3.81,6-3.81,6s-3.82-3.58-3.82-6A3.7,3.7,0,0,1,5.3,1.5,3.7,3.7,0,0,1,9.11,5.08Z"/><circle class="cls-2" cx="5.3" cy="5.32" r="0.95"/><path class="cls-1" d="M4.34,13h4.3A2.39,2.39,0,0,1,11,15.34h0a2.39,2.39,0,0,1-2.38,2.39H3.86a2.39,2.39,0,0,0-2.38,2.38h0A2.39,2.39,0,0,0,3.86,22.5H17.7"/><line class="cls-1" x1="16.75" y1="9.14" x2="16.75" y2="20.59"/><polygon class="cls-1" points="16.75 14.86 21.52 14.86 20.57 12.96 21.52 11.04 16.75 11.04 16.75 14.86"/></svg>
+            </div>
+            : <span class="icon-label__trip">${booking.destination}</span>
+        </div>
+        <p>Пасажир: ${booking.passanger}</p>
+        <p>Тип поїздки: ${booking.typeOfTravel}</p>
+        `;
+
                 if (booking.comment && booking.comment.trim() !== '') {
                     bookingInfo.innerHTML += `<p>Коментар: ${booking.comment}</p>`;
                 }
                 driverColumn.appendChild(bookingInfo);
             }
         });
-    
+
         driversContainer.appendChild(driverColumn);
     });
 
