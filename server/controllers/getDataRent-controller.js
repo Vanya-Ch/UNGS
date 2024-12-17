@@ -1,13 +1,11 @@
-const ExcelJS = require('exceljs');
-const fs = require('fs');
-const RentCar = require('../models/rentCar')
-const path = require('path');
+/* const ExcelJS = require('exceljs');
+const RentCar = require('../models/rentCar');
 
 const exportData = async (req, res) => {
     const { year, month } = req.query;
 
     if (!year || !month) {
-        return res.status(400).send('Параметри year і month є обов’язковими.');
+        return res.status(400).send('Рік і місяць є обов’язковими.');
     }
 
     try {
@@ -15,35 +13,26 @@ const exportData = async (req, res) => {
         const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0));
         const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59));
 
-        // Логування для перевірки дат
-        console.log('startDate:', startDate);
-        console.log('endDate:', endDate);
-
-        const allRentals = await RentCar.find();
-        console.log('Усі записи:', JSON.stringify(allRentals, null, 2));
-
+        // Отримуємо дані з бази даних
         const rentals = await RentCar.find({
-            "time.startTime": { 
-              $gte: startDate, 
-              $lte: endDate 
-            },
-          });
-          
-          console.log('Знайдені записи:', JSON.stringify(rentals, null, 2));
-          
+            "time.startTime": {
+                $gte: startDate,
+                $lte: endDate
+            }
+        });
 
         if (rentals.length === 0) {
             return res.status(404).send('Записи за цей період не знайдено.');
         }
 
-        // Створення Excel-файлу
+        // Генерація Excel-файлу
         const workbook = new ExcelJS.Workbook();
-        const worksheet = workbook.addWorksheet('Rentals');
+        const worksheet = workbook.addWorksheet('Бронювання');
 
         worksheet.columns = [
             { header: 'Водій', key: 'driver', width: 20 },
             { header: 'Пасажир', key: 'passanger', width: 20 },
-            { header: 'Куди', key: 'destination', width: 30 },
+            { header: 'Пункт призначення', key: 'destination', width: 30 },
         ];
 
         // Додавання даних до таблиці
@@ -55,20 +44,88 @@ const exportData = async (req, res) => {
             });
         });
 
-        // Зберігаємо файл на сервері
-        const filePath = path.join(__dirname, 'exports', `rentals_${year}_${month}.xlsx`);
-        await workbook.xlsx.writeFile(filePath);
+        // Створюємо Buffer
+        const buffer = await workbook.xlsx.writeBuffer();
 
-        // Відправляємо файл без видалення
-        res.download(filePath, (err) => {
-            if (err) {
-                console.error('Помилка при завантаженні файлу:', err);
-            }
-        });
+        // Відправляємо файл у відповіді
+        res.setHeader(
+            'Content-Disposition',
+            `attachment; filename="бронювання_${year}_${month}.xlsx"`
+        );
+        res.setHeader(
+            'Content-Type',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        );
+        res.send(buffer);
     } catch (error) {
         console.error(error);
         res.status(500).send('Виникла помилка на сервері.');
     }
 };
 
-module.exports = { exportData }
+module.exports = { exportData }; */
+
+const ExcelJS = require('exceljs');
+const RentCar = require('../models/rentCar');
+
+const exportData = async (req, res) => {
+    const { year, month } = req.query;
+
+    if (!year || !month) {
+        return res.status(400).send('Рік і місяць є обов’язковими.');
+    }
+
+    try {
+        // Створення діапазону дат для пошуку записів
+        const startDate = new Date(Date.UTC(year, month - 1, 1, 0, 0, 0));
+        const endDate = new Date(Date.UTC(year, month, 0, 23, 59, 59));
+
+        // Отримання даних із бази даних
+        const rentals = await RentCar.find({
+            "time.startTime": { $gte: startDate, $lte: endDate }
+        });
+
+        if (rentals.length === 0) {
+            return res.status(404).send('Записи за цей період не знайдено.');
+        }
+
+        // Генерація Excel-файлу
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Rentals');
+
+        worksheet.columns = [
+            { header: 'Водій', key: 'driver', width: 30 },
+            { header: 'Пасажир', key: 'passanger', width: 30 },
+            { header: 'Пункт призначення', key: 'destination', width: 50 },
+        ];
+
+        // Додавання даних до таблиці
+        rentals.forEach((rental) => {
+            worksheet.addRow({
+                driver: rental.driver,
+                passanger: rental.passanger,
+                destination: rental.destination,
+            });
+        });
+
+        // Запис файлу у буфер
+        const buffer = await workbook.xlsx.writeBuffer();
+
+        // Відправка файлу клієнту
+        res.setHeader(
+            'Content-Disposition',
+            `attachment; filename="rentals_${year}_${month}.xlsx"`
+        );
+        res.setHeader(
+            'Content-Type',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        );
+
+        res.send(buffer);
+    } catch (error) {
+        console.error('Помилка на сервері:', error);
+        res.status(500).send('Виникла помилка на сервері.');
+    }
+};
+
+module.exports = { exportData };
