@@ -8,36 +8,127 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Функція для створення користувача
-async function createUser(username, password, role) {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword, role });
+/* async function createUser(username, password, role, name, surname, fullname, position = '', department = '', mail = '', phone = '') {
+    const hashedPassword = await bcrypt.hash(password, 10); // Хешуємо пароль
+
+    // Створюємо нового користувача
+    const user = new User({
+        username,
+        password: hashedPassword,
+        role: role || ['user'], // Роль за замовчуванням — ['user']
+        name,
+        surname,
+        fullname,
+        position,
+        department,
+        contacts: { mail, phone }, // Заповнюємо контакти
+        status: 'offline', // Статус за замовчуванням
+        duty: role.includes('driver') ? 'не черговий' : undefined // Якщо роль "driver", встановлюємо "3" (не черговий)
+    });
+
     try {
-        const savedUser = await user.save();
+        const savedUser = await user.save(); // Зберігаємо користувача в базу
         console.log('User created:', savedUser);
+        return savedUser; // Повертаємо створеного користувача
     } catch (error) {
         console.error('Error creating user:', error);
+        throw error; // Пробрасываем ошибку, если она произошла
     }
-}
+} */
 
-//createUser('newsCreator','newsCreator',['user', 'newsCreator'])
-//createUser('user','user')
+
+/* (async () => {
+    await createUser(
+        'dr24tr001', 
+        'dr24tr001', 
+        ['user', 'driver'],
+        'Олександр', 
+        'Приходько',
+        'Приходько Олександр Юрійович', 
+        'Механік', 
+        'transport',
+        'o.prykhodko@ungs-drilling.com.ua', 
+        '+380959022715' 
+    );
+
+    await createUser(
+        'dr24tr002', 
+        'dr24tr002CH', 
+        ['user', 'driver'],
+        'Євгеній',
+        'Павлій',
+        'Павлій Євгеній Борисович',
+        'Водій автотранспортних засобів',
+        'transport',
+        'y.pavlii@ungs-drilling.com.ua',
+        '+380503086405'
+    );
+
+    await createUser(
+        'dr24tr003', 
+        'dr24tr003IC', 
+        ['user', 'driver'],
+        'Олександр',
+        'Карпенко',
+        'Карпенко Олександр Анатолійович',
+        'Водій автотранспортних засобів',
+        'transport',
+        'o.karpenko@ungs-drilling.com.ua',
+        '+380503462936'
+    );
+
+    await createUser(
+        'dr24tr004', 
+        'dr24tr004BM', 
+        ['user', 'driver'],
+        'Олександр',
+        'Патьома',
+        'Патьома Олександр Миколайович',
+        'Водій автотранспортних засобів',
+        'transport',
+        'o.patoma@ungs-drilling.com.ua',
+        '+380503057947'
+    );
+
+    await createUser(
+        'dr24tr005', 
+        'dr24tr005CK', 
+        ['user', 'driver'],
+        'Максим',
+        'Логвиненко',
+        'Логвиненко Максим Юрійович',
+        'Водій автотранспортних засобів',
+        'transport',
+        'm.lohvinenko@ungs-drilling.com.ua',
+        '+380997627794'
+    );
+})(); */
+
 
 // Контролер для логіну
 const postLogin = async (req, res) => {
     try {
         const { username, password } = req.body;
+
+        // Знаходимо користувача за username
         const candidate = await User.findOne({ username });
 
         if (candidate) {
+            // Перевіряємо пароль
             const samePass = await bcrypt.compare(password, candidate.password);
             if (samePass) {
+                // Зберігаємо потрібні дані у сесії
                 req.session.user = {
                     id: candidate._id,
                     username: candidate.username,
                     roles: candidate.role,
+                    name: candidate.name,          // Додаємо ім'я
+                    surname: candidate.surname,    // Додаємо прізвище
+                    status: candidate.status       // Додаємо статус
                 };
                 req.session.isAuthenticated = true;
 
+                // Зберігаємо сесію та перенаправляємо користувача
                 req.session.save((err) => {
                     if (err) {
                         console.error('Помилка збереження сесії:', err);
@@ -46,9 +137,11 @@ const postLogin = async (req, res) => {
                     res.redirect('/news'); 
                 });
             } else {
+                // Невірний пароль
                 res.redirect('/login');
             }
         } else {
+            // Користувач не знайдений
             res.redirect('/login');
         }
     } catch (e) {
@@ -56,6 +149,7 @@ const postLogin = async (req, res) => {
         res.status(500).send('Сталася помилка при вході.');
     }
 };
+
 
 
 

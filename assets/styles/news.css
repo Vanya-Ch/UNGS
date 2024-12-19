@@ -36,10 +36,10 @@ body {
 .news {
   position: relative;
   margin-bottom: 15px;
-  padding: 10px;
-  border: 2px dotted black;
+  padding: 20px;
+  border: 1px solid black;
   border-radius: 20px;
-  background-color: rgb(128, 128, 128);
+  background-color: whitesmoke;
 }
 .news__title {
   font-size: 1.5rem;
@@ -74,13 +74,21 @@ body {
 .asideRight__online {
   border: 1px solid black;
   height: 300px;
+  border-radius: 20px;
+  background-color: whitesmoke;
   width: 100%;
+}
+.asideRight__bd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .birthdayInfo {
-  background-color: white;
+  background-color: whitesmoke;
   padding: 10px;
   border-radius: 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: -webkit-fit-content;
@@ -123,9 +131,15 @@ body {
   display: flex;
   align-items: center;
 }
+.comment__fields {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .comment__text {
   border-radius: 20px;
   padding: 10px;
+  flex-basis: 80%;
 }
 .comment__button {
   border-radius: 20px;

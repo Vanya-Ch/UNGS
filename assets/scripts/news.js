@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
               </div>
 
               <div class="add-comment">
-                <form class="comment" data-id="${info._id}">
+                <form class="comment__fields" data-id="${info._id}">
                   <textarea class="comment__text" name="content" placeholder="Ваш коментар" required></textarea>
                   <button class="comment__button" type="submit">Відправити</button>
                 </form>

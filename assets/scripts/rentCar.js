@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     const carImages = {
-        'Toyota Hilux  ВІ 1900 СН': '../assets/images/hilux_white.png',
-        'Toyota Hilux  ВІ 0019 ВМ': '../assets/images/hilux_white.png',
+        'Toyota Hilux  ВІ 1900 СН': '../assets/images/hilux_blue.png',
+        'Toyota Hilux  ВІ 0019 ВМ': '../assets/images/hilux_blue.png',
         'Toyota Prado  ВІ 7040 ІС': '../assets/images/prado_black.png',
         'Range Rover  ВІ 0070 СК': '../assets/images/land_rover_gray.png',
         'Volkswagen Touareg  ВІ 1963 ІН': '../assets/images/touareg_black.png',

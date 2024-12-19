@@ -606,7 +606,8 @@ function createWorkersCards(containerId, department) {
         // Створення фото
         const img = document.createElement('img');
         img.src = worker.imgUrl;
-        img.alt = '';
+        img.alt = 'worker image';
+        img.loading = 'lazy';
         img.className = 'department__worker-img';
 
         // Створення блоку інформації

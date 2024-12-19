@@ -23,10 +23,10 @@
   background-size: cover;
 }
 .createNews__bg {
-  background-color: rgba(128, 128, 128, 0.801);
+  background-color: rgba(5, 141, 194, 0.4509803922);
   padding: 25px;
   border-radius: 20px;
-  border: 2px solid gray;
+  border: 1px solid #058dc2;
   width: 100%;
 }
 
