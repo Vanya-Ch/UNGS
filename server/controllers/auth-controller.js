@@ -39,68 +39,16 @@ app.use(express.urlencoded({ extended: true }));
 
 /* (async () => {
     await createUser(
-        'dr24tr001', 
-        'dr24tr001', 
+        'dr24tr006', 
+        'dr24tr006HC', 
         ['user', 'driver'],
-        'Олександр', 
-        'Приходько',
-        'Приходько Олександр Юрійович', 
-        'Механік', 
+        'Олексій', 
+        'Ноженко',
+        'Ноженко Олексій Б', 
+        'Водій автотранспортних засобів', 
         'transport',
-        'o.prykhodko@ungs-drilling.com.ua', 
-        '+380959022715' 
-    );
-
-    await createUser(
-        'dr24tr002', 
-        'dr24tr002CH', 
-        ['user', 'driver'],
-        'Євгеній',
-        'Павлій',
-        'Павлій Євгеній Борисович',
-        'Водій автотранспортних засобів',
-        'transport',
-        'y.pavlii@ungs-drilling.com.ua',
-        '+380503086405'
-    );
-
-    await createUser(
-        'dr24tr003', 
-        'dr24tr003IC', 
-        ['user', 'driver'],
-        'Олександр',
-        'Карпенко',
-        'Карпенко Олександр Анатолійович',
-        'Водій автотранспортних засобів',
-        'transport',
-        'o.karpenko@ungs-drilling.com.ua',
-        '+380503462936'
-    );
-
-    await createUser(
-        'dr24tr004', 
-        'dr24tr004BM', 
-        ['user', 'driver'],
-        'Олександр',
-        'Патьома',
-        'Патьома Олександр Миколайович',
-        'Водій автотранспортних засобів',
-        'transport',
-        'o.patoma@ungs-drilling.com.ua',
-        '+380503057947'
-    );
-
-    await createUser(
-        'dr24tr005', 
-        'dr24tr005CK', 
-        ['user', 'driver'],
-        'Максим',
-        'Логвиненко',
-        'Логвиненко Максим Юрійович',
-        'Водій автотранспортних засобів',
-        'transport',
-        'm.lohvinenko@ungs-drilling.com.ua',
-        '+380997627794'
+        'o.nozhenko@ungs-drilling.com.ua', 
+        '+380000000000' 
     );
 })(); */
 

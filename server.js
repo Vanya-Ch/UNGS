@@ -12,6 +12,7 @@ const MongoStore = require('connect-mongo');
 const authRequiredRole = require('./server/middleware/authRequiredRole')
 const authVar = require('./server/middleware/authVar')
 const userRoutes = require('./server/controllers/currentUser-controller');
+const getDrivers = require('./server/controllers/getDrivers-controller')
 require('dotenv').config();
 const app = express();
 
@@ -40,6 +41,7 @@ app.use(express.json());
 
 app.use(auth);
 app.use(authVar);
+app.use(getDrivers);
 app.use(userRoutes);
 app.use(infoRouter);
 app.use(exportRents);

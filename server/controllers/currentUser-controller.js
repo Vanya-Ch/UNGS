@@ -7,6 +7,8 @@ router.get('/current-user', (req, res) => {
             id: req.user.id,
             username: req.user.username,
             roles: req.user.roles,
+            name: req.user.name,
+            surname: req.user.surname,
         });
     }
 

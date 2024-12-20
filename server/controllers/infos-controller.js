@@ -52,8 +52,7 @@ const addComment = async (req, res) => {
   if (!req.session?.user) {
       return res.status(401).json({ message: 'Користувач не авторизований' });
   }
-  console.log(req.session.user)
-  console.log(req.user)
+  
   const author = req.session.user.surname + ' ' + req.session.user.name;
 
   try {

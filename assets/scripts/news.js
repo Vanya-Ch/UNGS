@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
             dates: ['1.11', '2.11'],
         },
         {
-            names: ['12', '122'],
-            dates: ['1.12', '2.12'],
+            names: ['Ноженко Олексій'],
+            dates: ['22.12'],
         },
     ]
 
@@ -114,14 +114,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
               <div class="comments">
                 ${info.comments.map(comment => `
-                  <div class="comment">
+                  <div class="comment__message">
                     <strong>${comment.author}:</strong> ${comment.content}
                   </div>
                 `).join('')}
               </div>
 
               <div class="add-comment">
-                <form class="comment__fields" data-id="${info._id}">
+                <form class=" comment comment__fields" data-id="${info._id}">
                   <textarea class="comment__text" name="content" placeholder="Ваш коментар" required></textarea>
                   <button class="comment__button" type="submit">Відправити</button>
                 </form>
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             return response.json();
                         })
                         .then(user => {
-                            const author = user.username;
+                            const author = `${user.surname} ${user.name}`;
             
                             // Відправляємо коментар на сервер
                             return fetch(`/infos/${newsId}/comments`, {
