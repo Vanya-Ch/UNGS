@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const allowedRoles = el.dataset.role.split(',');
                 const isAllowed = allowedRoles.some((role) => roles.includes(role));
                 if (!isAllowed) {
-                    el.style.display = 'none'; // Або el.remove()
+                    el.remove() // Або el.remove()
                 }
             });
         })
