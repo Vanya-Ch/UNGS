@@ -12,4 +12,34 @@
 .rentCar__container {
   max-width: 80.5555555556%;
   margin: 0 auto;
+}
+
+.formDuty {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 10px;
+  border-radius: 15px;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: gray;
+}
+.formDuty__group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.formDuty__select {
+  padding: 10px;
+  border-radius: 15px;
+}
+.formDuty__submit {
+  padding: 10px;
+  border-radius: 15px;
+  border: 1px solid black;
+  transition: all 0.3s linear;
+}
+.formDuty__submit:hover {
+  cursor: pointer;
+  background-color: green;
 }/*# sourceMappingURL=rentCar.css.map */

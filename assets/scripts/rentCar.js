@@ -93,9 +93,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-
 document.addEventListener('DOMContentLoaded', async function () {
     try {
         const [bookingsResponse, driversResponse] = await Promise.all([
@@ -120,14 +117,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             return acc;
         }, {});
 
-        
         displayBookingsByDriver(drivers, bookingsByDriver);
     } catch (error) {
         console.error('Помилка отримання даних:', error);
     }
 });
-
-
 
 function displayBookingsByDriver(drivers, bookingsByDriver) {
     const driversContainer = document.getElementById('driversContainer');
@@ -165,12 +159,15 @@ function displayBookingsByDriver(drivers, bookingsByDriver) {
         driverColumn.appendChild(driverHeaderContainer);
 
         // Відображення статусу чергового
-        const dutyInfo = createDutyInfo(driver);
-        driverColumn.appendChild(dutyInfo);
-
+        const dutyInfo = document.createElement('div');
+        dutyInfo.classList.add('duty-info');
+        dutyInfo.textContent = `${driver.duty}`;
+        dutyInfo.style.opacity = ['черговий', 'додатковий черговий'].includes(driver.duty) ? '1' : '0';
+        dutyInfo.style.textAlign = 'center';
+        driverHeaderContainer.appendChild(dutyInfo);
 
         // Відображення бронювань
-        const filteredBookings = (bookingsByDriver[driver._id]).filter(booking => {
+        const filteredBookings = (bookingsByDriver[driver._id] || []).filter(booking => {
             const bookingDate = new Date(booking.time[0].startTime);
             bookingDate.setHours(0, 0, 0, 0);
             return bookingDate.getTime() === today.getTime() || bookingDate.getTime() === tomorrow.getTime();
@@ -183,78 +180,6 @@ function displayBookingsByDriver(drivers, bookingsByDriver) {
 
         driversContainer.appendChild(driverColumn);
     });
-}
-
-function createDutyInfo(driver) {
-    const dutyInfo = document.createElement('div');
-    dutyInfo.classList.add('duty-info');
-    dutyInfo.textContent = `${driver.duty}`;
-    dutyInfo.style.opacity = driver.duty === 'не черговий' ? '0.5' : '1';
-
-    const toggleDutyFormBtn = document.createElement('button');
-    toggleDutyFormBtn.textContent = 'Змінити статус чергового';
-    toggleDutyFormBtn.setAttribute('data-role', 'admin,driver');
-    toggleDutyFormBtn.classList.add('toggle-duty-form-btn');
-
-    const dutyForm = document.createElement('form');
-    dutyForm.classList.add('duty-form');
-    dutyForm.style.display = 'none';
-
-    const dutySelect = document.createElement('select');
-    ['черговий', 'додатковий черговий', 'не черговий'].forEach(optionValue => {
-        const option = document.createElement('option');
-        option.value = optionValue;
-        option.textContent = optionValue;
-        if (optionValue === driver.duty) {
-            option.selected = true;
-        }
-        dutySelect.appendChild(option);
-    });
-
-    const submitButton = document.createElement('button');
-    submitButton.type = 'submit';
-    submitButton.textContent = 'Зберегти';
-
-    dutyForm.appendChild(dutySelect);
-    dutyForm.appendChild(submitButton);
-
-    toggleDutyFormBtn.addEventListener('click', () => {
-        dutyForm.style.display = dutyForm.style.display === 'none' ? 'block' : 'none';
-    });
-
-    dutyForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const newDuty = dutySelect.value;
-
-        submitButton.disabled = true;
-        try {
-            const response = await fetch(`/users/${driver._id}/duty`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ duty: newDuty })
-            });
-
-            if (response.ok) {
-                driver.duty = newDuty;
-                dutyInfo.textContent = `${newDuty}`;
-                dutyInfo.style.opacity = newDuty === 'не черговий' ? '0.5' : '1';
-                dutyForm.style.display = 'none';
-            } else {
-                const errorMessage = await response.json();
-                alert(`Помилка: ${errorMessage.message}`);
-            }
-        } catch (error) {
-            console.error('Помилка запиту:', error);
-            alert('Сталася помилка. Спробуйте пізніше.');
-        } finally {
-            submitButton.disabled = false;
-        }
-    });
-
-    dutyInfo.appendChild(toggleDutyFormBtn);
-    dutyInfo.appendChild(dutyForm);
-
-    return dutyInfo;
 }
 
 function createBookingInfo(booking) {
@@ -296,3 +221,65 @@ function createBookingInfo(booking) {
     return bookingInfo;
 }
 
+document.addEventListener('DOMContentLoaded', async () => {
+    const primaryDutySelect = document.getElementById('primaryDuty');
+    const additionalDutySelect = document.getElementById('additionalDuty');
+    const dutyForm = document.querySelector('.duty__form');
+
+    try {
+        // Завантаження списку водіїв
+        const response = await fetch('/users/drivers');
+        if (!response.ok) throw new Error(`Помилка запиту: ${response.status}`);
+        const drivers = await response.json();
+
+        // Заповнення селектів водіями
+        drivers.forEach(driver => {
+            const optionPrimary = document.createElement('option');
+            optionPrimary.value = driver._id;
+            optionPrimary.textContent = `${driver.name} ${driver.surname}`;
+            primaryDutySelect.appendChild(optionPrimary);
+
+            const optionAdditional = document.createElement('option');
+            optionAdditional.value = driver._id;
+            optionAdditional.textContent = `${driver.name} ${driver.surname}`;
+            additionalDutySelect.appendChild(optionAdditional);
+        });
+
+        // Обробка форми
+        dutyForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const primaryDutyId = primaryDutySelect.value;
+            const additionalDutyId = additionalDutySelect.value;
+
+            for (const driver of drivers) {
+                let newDuty = 'не черговий';
+                if (driver._id === primaryDutyId) {
+                    newDuty = 'черговий';
+                } else if (driver._id === additionalDutyId) {
+                    newDuty = 'додатковий черговий';
+                }
+
+                // Відправка PATCH-запиту для оновлення duty
+                try {
+                    const response = await fetch(`/users/${driver._id}/duty`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ duty: newDuty }),
+                    });
+
+                    if (!response.ok) {
+                        const errorMessage = await response.json();
+                        console.error(`Помилка оновлення водія ${driver._id}: ${errorMessage.message}`);
+                    }
+                } catch (error) {
+                    console.error(`Помилка запиту для водія ${driver._id}:`, error);
+                }
+            }
+
+            alert('Статуси водіїв успішно оновлено');
+        });
+    } catch (error) {
+        console.error('Помилка отримання водіїв:', error);
+    }
+});

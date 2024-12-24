@@ -374,7 +374,21 @@
                 </div>
 
             </div>
-            <div>123</div>
+            <div data-role="admin,hr,receptionist,driver" class="duty">
+                <form class="duty__form formDuty">
+                    <div class="formDuty__group">
+                        <label for="primaryDuty">Черговий:</label>
+                        <select class="formDuty__select" id="primaryDuty" name="primaryDuty">
+                        </select>
+                    </div>
+                    <div class="formDuty__group">
+                        <label for="additionalDuty">Додатковий черговий:</label>
+                        <select class="formDuty__select" id="additionalDuty" name="additionalDuty">
+                        </select>
+                    </div>
+                    <button class="formDuty__submit" type="submit">Зберегти</button>
+                </form>
+            </div>
             <div id="driversContainer"></div>
 
         </div>
