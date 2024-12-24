@@ -17,7 +17,7 @@
 .formDuty {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 400px;
   gap: 10px;
   border-radius: 15px;
   margin-top: 15px;
