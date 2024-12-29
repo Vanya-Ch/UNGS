@@ -26,6 +26,9 @@ ol {
 }
 
 .navigation {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   position: fixed;
   left: 0;
   top: 0;
@@ -75,15 +78,14 @@ header__container {
 }
 
 .logout__button {
-  padding: 10px;
-  border-radius: 20px;
-  border: 1px solid black;
-  background-color: gray;
-  transition: all 0.3s linear;
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.8);
+  background-color: #058cc2;
 }
 .logout__button:hover {
+  background-color: #fff;
   cursor: pointer;
-  background-color: red;
 }
 
 .logo-animation {

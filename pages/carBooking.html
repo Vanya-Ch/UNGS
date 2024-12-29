@@ -255,35 +255,44 @@
 
 <body>
     <header class="header">
-        <form id="logout-form" class="logout" action="/logout" method="POST" style="display: inline;">
-            <button class="logout__button" type="submit">Вийти</button>
-        </form>
+        
     </header>
     <aside class="asideNavigation">
         <nav class="navigation">
-            <div class="navigation__logo">
-                <img class="logo-animation" src="../assets/images/logo.png" alt="logo">
+            <div class="navigation__menu">
+                <div class="navigation__logo">
+                    <img class="logo-animation" src="../assets/images/logo.png" alt="logo">
+                </div>
+                <ul class="navigation__menu">
+                    <li class="navigation__content">
+                        <a href="/news" class="navigation__link">Новини</a>
+                    </li>
+                    <li data-role="admin,newsCreator" class="navigation__content">
+                        <a href="/createNews" class="navigation__link">Створення новин</a>
+                    </li>
+                    <li class="navigation__content">
+                        <a href="/orgStructure" class="navigation__link">Оргструктура</a>
+                    </li>
+                    <li class="navigation__content">
+                        <a href="/carBooking" class="navigation__link">Бронювання авто</a>
+                    </li>
+                    <li class="navigation__content">
+                        <a href="/tasks" class="navigation__link">Завдання</a>
+                    </li>
+                    <li class="navigation__content">
+                        <a href="/settings" class="navigation__link">Налаштування</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="navigation__menu">
-                <li class="navigation__content">
-                    <a href="/news" class="navigation__link">Новини</a>
-                </li>
-                <li data-role="admin,newsCreator" class="navigation__content">
-                    <a href="/createNews" class="navigation__link">Створення новин</a>
-                </li>
-                <li class="navigation__content">
-                    <a href="/orgStructure" class="navigation__link">Оргструктура</a>
-                </li>
-                <li class="navigation__content">
-                    <a href="/carBooking" class="navigation__link">Бронювання авто</a>
-                </li>
-                <li class="navigation__content">
-                    <a href="/tasks" class="navigation__link">Завдання</a>
-                </li>
-                <li class="navigation__content">
-                    <a href="/settings" class="navigation__link">Налаштування</a>
-                </li>
-            </ul>
+            <div class="navigation__exit">
+                <ul class="navigation__menu">
+                    <li class="navigation__content">
+                        <form id="logout-form" class="logout" action="/logout" method="POST" style="display: inline;">
+                            <button class="logout__button navigation__link" type="submit">Вийти</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </aside>
     <main class="rentCar">
@@ -364,7 +373,7 @@
                         <div class="form__buttons">
                             <button class="form__buttons--submit" type="submit">Забронювати</button>
                             <button class="form__buttons--reset" type="reset">Очистити</button>
-                            <button class="form__buttons--get" data-role="admin,finance" id="exportBtn"
+                            <button class="form__buttons--get" data-role="admin,accountant" id="exportBtn"
                                 type="reset">Витяг данних</button>
                         </div>
                     </form>
@@ -374,7 +383,7 @@
                 </div>
 
             </div>
-            <div data-role="admin,hr,receptionist,driver" class="duty">
+            <div data-role="admin,hr,receptionist,driver,newsCreator" class="duty">
                 <form class="duty__form formDuty">
                     <div class="formDuty__group">
                         <label for="primaryDuty">Черговий:</label>

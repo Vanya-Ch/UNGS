@@ -86,6 +86,7 @@ body{
 .birthdayInfo {
     background-color: whitesmoke;
     padding: 10px;
+    max-height: 300px;
     border-radius: 20px;
     margin-top: 10px;
     width: 100%;
@@ -112,6 +113,13 @@ body{
         border-right: 5px solid transparent;
         border-bottom: 10px solid black;
         border-top: none;
+    }
+    &__main{
+        overflow-y: scroll; 
+        scrollbar-width: none; 
+    }
+    &::-webkit-scrollbar{
+        display: none;
     }
     &__main.hidden{
         display: none;

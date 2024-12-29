@@ -23,6 +23,9 @@ ol {
 }
 
 .navigation {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
     position: fixed;
     left: 0;
     top: 0;
@@ -77,14 +80,13 @@ header{
 
 .logout{
     &__button{
-        padding: 10px;
-        border-radius: 20px;
-        border: 1px solid black;
-        background-color: gray;
-        transition: all .3s linear;
+        width: 100%;
+        border: none;
+        border-top: 1px solid $bordersWhite;
+        background-color: $navigationMenu-bg;
         &:hover{
+            background-color: $white;
             cursor: pointer;
-            background-color: red;
         }
     }
 }

@@ -227,12 +227,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const dutyForm = document.querySelector('.duty__form');
 
     try {
-        // Завантаження списку водіїв
         const response = await fetch('/users/drivers');
         if (!response.ok) throw new Error(`Помилка запиту: ${response.status}`);
         const drivers = await response.json();
 
-        // Заповнення селектів водіями
         drivers.forEach(driver => {
             const optionPrimary = document.createElement('option');
             optionPrimary.value = driver._id;
@@ -245,7 +243,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             additionalDutySelect.appendChild(optionAdditional);
         });
 
-        // Обробка форми
         dutyForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
@@ -260,7 +257,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     newDuty = 'додатковий черговий';
                 }
 
-                // Відправка PATCH-запиту для оновлення duty
                 try {
                     const response = await fetch(`/users/${driver._id}/duty`, {
                         method: 'PATCH',
