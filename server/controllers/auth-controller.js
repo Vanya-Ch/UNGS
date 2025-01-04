@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 /* // Функція для створення користувача
 async function createUser(username, password, role, name, surname, fullname, position = '', department = '', mail = '', phone = '') {
     const hashedPassword = await bcrypt.hash(password, 10); // Хешуємо пароль
@@ -282,8 +283,8 @@ async function createUser(username, password, role, name, surname, fullname, pos
             admin.contacts.phone
         );
     }
-})();
- */
+})(); */
+
 
 
 

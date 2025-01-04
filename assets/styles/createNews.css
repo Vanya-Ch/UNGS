@@ -5,6 +5,12 @@
 .createNews {
   margin-left: 200px;
 }
+@media screen and (max-width: 900px) {
+  .createNews {
+    margin-left: 0;
+    padding-top: 80px;
+  }
+}
 .createNews__container {
   max-width: 80.5555555556%;
   margin: 0 auto;

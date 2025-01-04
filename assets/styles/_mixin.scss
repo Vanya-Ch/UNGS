@@ -5,4 +5,8 @@
 
 @mixin mainMG-L{
     margin-left: 200px;
+    @media screen and (max-width:900px) {
+        margin-left: 0;
+        padding-top: 80px;
+    }
 }
