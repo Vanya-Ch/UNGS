@@ -16,7 +16,9 @@ body{
 
 .sectionNews {
     margin-right: 170px;
-
+    @media screen and (max-width:900px) {
+        margin-right: 0;
+    }
     &__container {
         @include container;
     }
@@ -27,6 +29,9 @@ body{
         overflow-y: scroll;
         scrollbar-width: none;
         --ms-overflow-style: none;
+        @media screen and (max-width:900px) {
+            padding-top: 0;
+        }
     }
 }
 
@@ -63,6 +68,9 @@ body{
     max-width: 170px;
     width: 100%;
     margin-right: 20px;
+    @media screen and (max-width:900px) {
+        display: none;
+    }
     &__content {
         display: flex;
         flex-direction: column;
