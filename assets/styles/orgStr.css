@@ -91,6 +91,11 @@
   margin: 0 auto;
   position: relative;
 }
+@media screen and (max-width: 900px) {
+  .orgMain__container {
+    margin: 0 60px;
+  }
+}
 .orgMain__content {
   display: flex;
   flex-direction: column;

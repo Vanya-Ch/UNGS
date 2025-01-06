@@ -19,6 +19,11 @@
   max-width: 80.5555555556%;
   margin: 0 auto;
 }
+@media screen and (max-width: 900px) {
+  .rentCar__container {
+    margin: 0 60px;
+  }
+}
 
 .formDuty {
   display: flex;
@@ -195,6 +200,11 @@
   gap: 20px;
   overflow-x: auto;
   padding: 20px;
+}
+@media screen and (max-width: 900px) {
+  #driversContainer {
+    padding: 20px 0 0 0;
+  }
 }
 
 .driver-column {

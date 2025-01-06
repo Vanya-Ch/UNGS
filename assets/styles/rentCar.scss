@@ -177,6 +177,9 @@
     gap: 20px;
     overflow-x: auto;
     padding: 20px;
+    @media screen and (max-width:900px) {
+        padding: 20px 0 0 0;
+    }
 }
 
 .driver-column {
